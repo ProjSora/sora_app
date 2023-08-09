@@ -2,7 +2,7 @@
   Main entry point for the app.
 */
 import 'package:flutter/material.dart';
-import 'utils/bottom_navigate.dart';
+import 'package:sora/screens/Home/utils/bottom_navigate.dart';
 
 void main() {
   runApp(const MyApp());
