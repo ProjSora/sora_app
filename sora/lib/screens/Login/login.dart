@@ -23,6 +23,8 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController passwordController;
   String? userInfo = "";
 
+  bool passwordVisible = false;
+
   static const storage = FlutterSecureStorage();
 
   @override
@@ -60,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       child : Scaffold(
         appBar: AppBar(
-          title: const Text('Login'),
+          title: const Text(''),
         ),
         body: Padding(
           padding: const EdgeInsets.all(10),
@@ -68,19 +70,37 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
+                Image.asset('assets/images/sora_logo.png'),
                 TextField(
                   controller: idController,
                   decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.person),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                    ),
                     labelText: 'id',
                   ),
                 ),
                 const SizedBox(height: 10,),
                 TextField(
+                  obscureText: passwordVisible,
+                  enableSuggestions: false,
+                  autocorrect: false,
                   controller: passwordController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    icon: const Icon(Icons.password),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                    ),
                     labelText: 'password',
+                    suffixIcon: IconButton(
+                      icon : Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          passwordVisible = !passwordVisible;
+                        });
+                      },
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10,),
@@ -102,7 +122,6 @@ class _LoginPageState extends State<LoginPage> {
                       }),
                     );
                     if (result.statusCode == 200) {
-                      print(result.body);
                       loginInfo.setEmail(idController.text);
                       Navigator.pushReplacement(context, 
                         MaterialPageRoute(
