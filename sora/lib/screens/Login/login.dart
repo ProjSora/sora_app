@@ -70,7 +70,8 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
-                Image.asset('assets/images/sora_logo.png'),
+                Image.asset('images/sora_logo.png', width: 150, height: 150),
+                const SizedBox(height: 10,),
                 TextField(
                   controller: idController,
                   decoration: const InputDecoration(
