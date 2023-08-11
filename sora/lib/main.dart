@@ -3,7 +3,6 @@
 */
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider/provider.dart';
 import 'package:sora/providers/login_model.dart';
 import 'package:sora/screens/Login/login.dart';
 
