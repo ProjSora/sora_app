@@ -2,6 +2,9 @@ import 'package:http/http.dart' as http;
 
 var loginUrl = Uri.http('localhost:8000', 'sora/app_login');
 var registUrl = Uri.http('localhost:8000', 'sora/regist_user');
+var emailAuthUrl = Uri.http('localhost:8000', 'sora/email_auth');
+var phoneAuthUrl = Uri.http('localhost:8000', 'sora/phone_auth');
+
 var readUserUrl = Uri.http('localhost:8000', 'sora/read_user');
 var updateUserUrl = Uri.http('localhost:8000', 'sora/update_user');
 var deleteUserUrl = Uri.http('localhost:8000', 'sora/delete_user');

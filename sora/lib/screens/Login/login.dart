@@ -6,6 +6,8 @@ import 'package:sora/screens/Home/utils/bottom_navigate.dart';
 import 'package:provider/provider.dart';
 import 'package:sora/providers/login_model.dart';
 import 'package:http/http.dart' as http;
+
+import 'package:sora/screens/Regist/regist_1.dart';
 import 'package:sora/screens/Regist/regist.dart';
 import 'package:sora/utils/urls.dart';
 
@@ -23,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController passwordController;
   String? userInfo = "";
 
-  bool passwordVisible = false;
+  bool passwordVisible = true;
 
   static const storage = FlutterSecureStorage();
 
@@ -140,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const RegistPage(),
+                        builder: (context) => const SignUpFirstPage(),
                       ),
                     );
                   },
