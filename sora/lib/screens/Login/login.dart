@@ -41,8 +41,8 @@ class _LoginPageState extends State<LoginPage> {
 
   _asyncMethod() async {
     userInfo = await storage.read(key:"login");
-    print(userInfo);
 
+    if(!mounted) return;
     if (userInfo != null) {
       Navigator.pushAndRemoveUntil(
         context,
@@ -122,6 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                         "user_pw": passwordController.text,
                       }),
                     );
+                    if (!mounted) return;
                     if (result.statusCode == 200) {
                       loginInfo.setEmail(idController.text);
                       Navigator.pushReplacement(context, 
@@ -130,7 +131,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       );
                     } else {
-                      print(result.statusCode);
                       _showDialog('Failed to login');
                     }
                   } : () => {},

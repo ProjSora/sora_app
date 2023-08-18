@@ -122,6 +122,7 @@ class _SignUpFirstPageState extends State<SignUpFirstPage> {
                         }),
                       );
                       var response = json.decode(result.body);
+                      if (!mounted) return;
                       if (response["state_code"] == '200'){
                         Navigator.push(
                           context,

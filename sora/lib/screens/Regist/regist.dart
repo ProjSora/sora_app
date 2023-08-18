@@ -177,6 +177,7 @@ class _RegistPageState extends State<RegistPage> {
                           "description": descriptionController.text,
                         })
                       );
+                      if (!mounted) return;
                       if (result.statusCode == 200) {
                         _showDialog('Regist success');
                         Navigator.pop(context);

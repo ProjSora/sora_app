@@ -1,5 +1,3 @@
-import 'package:http/http.dart' as http;
-
 var loginUrl = Uri.http('localhost:8000', 'sora/app_login');
 var registUrl = Uri.http('localhost:8000', 'sora/regist_user');
 var emailAuthUrl = Uri.http('localhost:8000', 'sora/email_auth');

@@ -3,8 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sora/providers/login_model.dart';
 import 'package:sora/screens/Login/login.dart';
-import 'package:sora/providers/login_model.dart';
-import 'package:provider/provider.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -33,6 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () async {
                 await storage.delete(key: "login");
                 loginInfo.logout();
+                if(!mounted) return;
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
