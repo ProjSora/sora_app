@@ -8,7 +8,6 @@ import 'package:sora/providers/login_model.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:sora/screens/Regist/regist_1.dart';
-import 'package:sora/screens/Regist/regist.dart';
 import 'package:sora/utils/urls.dart';
 
 class LoginPage extends StatefulWidget {
@@ -45,11 +44,11 @@ class _LoginPageState extends State<LoginPage> {
     print(userInfo);
 
     if (userInfo != null) {
-      Navigator.pushReplacement(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) => const HomeNavigationBar(),
-        ),
+        ), (route) => false,
       );
     }
   }
@@ -63,9 +62,6 @@ class _LoginPageState extends State<LoginPage> {
         FocusScope.of(context).unfocus();
       },
       child : Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-        ),
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: Center(
@@ -108,7 +104,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 10,),
                 FilledButton(
-                  onPressed: () async {
+                  onPressed: (idController.text.isNotEmpty &&
+                              passwordController.text.isNotEmpty) ? 
+                    () async {
                     await storage.write(
                       key: 'login',
                       value: "id${idController.text} password${passwordController.text}",
@@ -135,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                       print(result.statusCode);
                       _showDialog('Failed to login');
                     }
-                  },
+                  } : () => {},
                   child: const Text('Login'),
                 ),
                 TextButton(

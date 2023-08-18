@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sora/providers/login_model.dart';
 import 'package:sora/screens/Login/login.dart';
-
+import 'package:sora/providers/login_model.dart';
+import 'package:provider/provider.dart';
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -25,20 +26,24 @@ class _ProfilePageState extends State<ProfilePage> {
         title: const Text('Profile'),
       ),
       body: Center(
-        child: 
-          FilledButton(
-            onPressed: () async {
-              await storage.delete(key: "login");
-              loginInfo.logout();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginPage(),
-                ),
-              );
-            },
-            child: const Text('Logout'),
-          ),
+        child: Column(
+          children: [
+            Text(loginInfo.getEmail()),
+            FilledButton(
+              onPressed: () async {
+                await storage.delete(key: "login");
+                loginInfo.logout();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginPage(),
+                  ), (route) => false,
+                );
+              },
+              child: const Text('Logout'),
+            )
+          ]
+        ),
       ),
     );
   }
