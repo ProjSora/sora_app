@@ -6,10 +6,10 @@ import 'package:sora/screens/Regist/regist_4.dart';
 import 'package:sora/utils/urls.dart';
 
 class SignUpThirdPage extends StatefulWidget {
-  String email = '';
-  String password = '';
-  String phone = '';
-  SignUpThirdPage(this.email, this.password, this.phone, {Key? key})
+  final String email = '';
+  final String password = '';
+  final String phone = '';
+  const SignUpThirdPage(email, password, phone, {Key? key})
       : super(key: key);
 
   @override
@@ -124,12 +124,13 @@ class _SignUpThirdPageState extends State<SignUpThirdPage> {
                           "description": descriptionController.text,
                         })
                       );
+                      if (!mounted) return;
                       if (result.statusCode == 200) {
                         _showDialog("회원가입이 완료되었습니다.");
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SignUpFinishedPage(),
+                            builder: (context) => const SignUpFinishedPage(),
                           ),
                         );
                       } else {

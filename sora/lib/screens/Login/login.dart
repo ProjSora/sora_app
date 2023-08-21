@@ -5,10 +5,10 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sora/screens/Home/utils/bottom_navigate.dart';
 import 'package:provider/provider.dart';
 import 'package:sora/providers/login_model.dart';
+import 'package:sora/providers/user_model.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:sora/screens/Regist/regist_1.dart';
-import 'package:sora/screens/Regist/regist.dart';
 import 'package:sora/utils/urls.dart';
 
 class LoginPage extends StatefulWidget {
@@ -40,16 +40,23 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  @override
+  void dispose() {
+    idController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   _asyncMethod() async {
     userInfo = await storage.read(key:"login");
-    print(userInfo);
 
+    if(!mounted) return;
     if (userInfo != null) {
-      Navigator.pushReplacement(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) => const HomeNavigationBar(),
-        ),
+        ), (route) => false,
       );
     }
   }
@@ -57,15 +64,13 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Login loginInfo = Provider.of<Login>(context);
+    UserInfo userInfo = Provider.of<UserInfo>(context);
 
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
       child : Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-        ),
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: Center(
@@ -108,7 +113,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 10,),
                 FilledButton(
-                  onPressed: () async {
+                  onPressed: (idController.text.isNotEmpty &&
+                              passwordController.text.isNotEmpty) ? 
+                    () async {
                     await storage.write(
                       key: 'login',
                       value: "id${idController.text} password${passwordController.text}",
@@ -124,18 +131,30 @@ class _LoginPageState extends State<LoginPage> {
                         "user_pw": passwordController.text,
                       }),
                     );
-                    if (result.statusCode == 200) {
+                    var response = jsonDecode(utf8.decode(result.bodyBytes));
+                    if (!mounted) return;
+                    if (result.statusCode == 200 && response["status"] == "success") {
                       loginInfo.setEmail(idController.text);
+                      userInfo.setUserInfo(
+                        response["user_id"],
+                        response["email"],
+                        response["gender"],
+                        response["phone_number"],
+                        response["university"],
+                        response["student_id"],
+                        response["department"],
+                        response["description"],
+                        response["auth"]
+                      );
                       Navigator.pushReplacement(context, 
                         MaterialPageRoute(
                           builder: (context) => const HomeNavigationBar(),
                         ),
                       );
                     } else {
-                      print(result.statusCode);
                       _showDialog('Failed to login');
                     }
-                  },
+                  } : () => {},
                   child: const Text('Login'),
                 ),
                 TextButton(
@@ -168,5 +187,10 @@ class _LoginPageState extends State<LoginPage> {
         ]
       )
     );
+  }
+
+  void readUserInfo(response) {
+    
+    
   }
 }

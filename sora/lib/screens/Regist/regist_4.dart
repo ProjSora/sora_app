@@ -27,8 +27,8 @@ class _SignUpFinishedPageState extends State<SignUpFinishedPage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => const LoginPage()),);
+                    Navigator.pushAndRemoveUntil(context,
+                      MaterialPageRoute(builder: (context) => const LoginPage()), (route) => false);
                   },
                   child: const Text('로그인'),
                 ),

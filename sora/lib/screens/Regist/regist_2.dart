@@ -6,9 +6,9 @@ import 'package:sora/utils/urls.dart';
 import 'package:sora/screens/Regist/regist_3.dart';
 
 class SignUpSecondPage extends StatefulWidget {
-  String email = '';
-  String password = '';
-  SignUpSecondPage(this.email, this.password, {Key? key}) : super(key: key);
+  final String email = '';
+  final String password = '';
+  const SignUpSecondPage(email, password, {Key? key}) : super(key: key);
   
   @override
   State<SignUpSecondPage> createState() => _SignUpSecondPageState();
@@ -93,6 +93,7 @@ class _SignUpSecondPageState extends State<SignUpSecondPage> {
                               })
                             );
                             var response = json.decode(result.body);
+                            if (!mounted) return;
                             if (response["state_code"] == '200') {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
