@@ -6,10 +6,10 @@ import 'package:sora/screens/Regist/regist_4.dart';
 import 'package:sora/utils/urls.dart';
 
 class SignUpThirdPage extends StatefulWidget {
-  final String email = '';
-  final String password = '';
-  final String phone = '';
-  const SignUpThirdPage(email, password, phone, {Key? key})
+  final String email;
+  final String password;
+  final String phone;
+  const SignUpThirdPage(this.email, this.password, this.phone, {Key? key})
       : super(key: key);
 
   @override
@@ -56,6 +56,7 @@ class _SignUpThirdPageState extends State<SignUpThirdPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  Text(widget.phone),
                   const Text("회원정보를 입력 해 주세요."),
                   const SizedBox(height: 20),
                   const Row(
@@ -117,7 +118,7 @@ class _SignUpThirdPageState extends State<SignUpThirdPage> {
                         body: json.encode({
                           "email" : widget.email,
                           "user_pw": widget.password,
-                          "phone": widget.phone,
+                          "phone_number": widget.phone,
                           "university": universityController.text,
                           "department": departmentController.text,
                           "student_id": studentIdController.text,
