@@ -1,3 +1,7 @@
+/// this page is for sign up step 2
+/// this page phone number
+/// and authrication phone number
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -51,7 +55,17 @@ class _SignUpSecondPageState extends State<SignUpSecondPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(widget.email),
+                  const Row(
+                    children: <Widget>[
+                      Icon(Icons.radio_button_unchecked_outlined, size: 40),
+                      SizedBox(width: 20),
+                      Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                      SizedBox(width: 20),
+                      Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                      SizedBox(width: 20),
+                      Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                    ],
+                  ),
                   const Text("인증을 위한 휴대전화 번호를 입력해 주세요."),
                   const SizedBox(height: 20),
                   Row(
