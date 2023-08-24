@@ -1,3 +1,7 @@
+/// this page is for sign up step 2
+/// this page phone number
+/// and authrication phone number
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -6,9 +10,9 @@ import 'package:sora/utils/urls.dart';
 import 'package:sora/screens/Regist/regist_3.dart';
 
 class SignUpSecondPage extends StatefulWidget {
-  final String email = '';
-  final String password = '';
-  const SignUpSecondPage(email, password, {Key? key}) : super(key: key);
+  final String email;
+  final String password;
+  const SignUpSecondPage(this.email, this.password, {Key? key}) : super(key: key);
   
   @override
   State<SignUpSecondPage> createState() => _SignUpSecondPageState();
@@ -51,6 +55,17 @@ class _SignUpSecondPageState extends State<SignUpSecondPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  const Row(
+                    children: <Widget>[
+                      Icon(Icons.radio_button_unchecked_outlined, size: 40),
+                      SizedBox(width: 20),
+                      Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                      SizedBox(width: 20),
+                      Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                      SizedBox(width: 20),
+                      Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                    ],
+                  ),
                   const Text("인증을 위한 휴대전화 번호를 입력해 주세요."),
                   const SizedBox(height: 20),
                   Row(

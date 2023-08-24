@@ -42,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Center(
         child: Column(
           children: [
-            Text(userInfo.userEmail ?? ""),
+            /*Text(userInfo.userEmail ?? ""),
             Text(userInfo.userId.toString()),
             Text(userInfo.userGender ?? ""),
             Text(userInfo.userPhone ?? ""),
@@ -50,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Text(userInfo.userStudentId ?? ""),
             Text(userInfo.userDepartment ?? ""),
             Text(userInfo.userDescription ?? ""),
-            Text(userInfo.userAuth.toString()),
+            Text(userInfo.userAuth.toString()),*/
             FilledButton(
               onPressed: () async {
                 await storage.delete(key: "login");

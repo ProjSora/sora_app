@@ -1,3 +1,6 @@
+/// this page is for sign up step 1
+/// this page collect email, password, password confirm
+
 import 'package:flutter/material.dart';
 import 'package:sora/screens/Regist/regist_2.dart';
 
