@@ -76,6 +76,18 @@ flutter:
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
+  fonts:
+    #- family: ko_fonts
+    #  fonts:
+    #    - asset: assets/fonts/font_1.otf
+    - family: Hakgyo
+      fonts:
+        - asset: assets/fonts/HakgyoansimWoojuR.ttf
+
+    - family: bitbit
+      fonts:
+        - asset: assets/fonts/DNFBitBitTTF.ttf
+
   # example:
   # fonts:
   #   - family: Schyler

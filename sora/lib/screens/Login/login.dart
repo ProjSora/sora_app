@@ -138,6 +138,9 @@ class _LoginPageState extends State<LoginPage> {
                       userInfo.setUserInfo(
                         response["user_id"],
                         response["email"],
+                        response["user_name"],
+                        response["user_nick"],
+                        response["user_mbti"],
                         response["gender"],
                         response["phone_number"],
                         response["university"],

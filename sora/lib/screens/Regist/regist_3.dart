@@ -71,6 +71,7 @@ class _SignUpThirdPageState extends State<SignUpThirdPage> {
             color: ColorScheme.fromSwatch(primarySwatch: Colors.lightGreen)
                 .secondary,
           ),
+          title: const Text('회원가입', style: TextStyle(fontFamily: 'bitbit', fontSize: 30)),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -79,6 +80,22 @@ class _SignUpThirdPageState extends State<SignUpThirdPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  const Center(  
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                        SizedBox(width: 20),
+                        Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                        SizedBox(width: 20),
+                        Icon(Icons.radio_button_checked, size: 40),
+                        SizedBox(width: 20),
+                        Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
                   const Text("회원가입을 위한 필수 정보를 입력 해 주세요."),
                   const SizedBox(height: 20),
                   Row(
@@ -339,38 +356,6 @@ class _SignUpThirdPageState extends State<SignUpThirdPage> {
                       );
                     },
                     child: const Text('다음'),
-                    /*onPressed: () async {
-                      var result = await http.post(
-                        Uri.parse(registUrl.toString()),
-                        headers: {
-                          "Accept": "application/json",
-                          "Content-Type": "application/json",
-                        },
-                        body: json.encode({
-                          "email" : widget.email,
-                          "user_pw": widget.password,
-                          "phone_number": widget.phone,
-                          "gender": signUpGender,
-                          "university": universityController.text,
-                          "department": departmentController.text,
-                          "student_id": studentIdController.text,
-                          "description": descriptionController.text,
-                        })
-                      );
-                      if (!mounted) return;
-                      if (result.statusCode == 200) {
-                        _showDialog("회원가입이 완료되었습니다.");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SignUpFinishedPage(),
-                          ),
-                        );
-                      } else {
-                        _showDialog("회원가입에 실패하였습니다.");
-                      }
-                    },
-                    child: const Text('완료'),*/
                   ),
                 ],
               ),

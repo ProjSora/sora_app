@@ -21,14 +21,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   // This is the state of the profile page.
   static const storage = FlutterSecureStorage();
-  int? user_email;
-  String? user_gender;
-  String? user_phone;
-  String? user_university;
-  String? user_studentId;
-  String? user_department;
-  String? user_description;
-  bool? user_auth;
 
   @override
   Widget build(BuildContext context) {
@@ -37,33 +29,118 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text('회원정보', style: TextStyle(fontFamily: 'bitbit', fontSize: 30)),
       ),
       body: Center(
         child: Column(
           children: [
-            /*Text(userInfo.userEmail ?? ""),
-            Text(userInfo.userId.toString()),
-            Text(userInfo.userGender ?? ""),
-            Text(userInfo.userPhone ?? ""),
-            Text(userInfo.userUniversity ?? ""),
-            Text(userInfo.userStudentId ?? ""),
-            Text(userInfo.userDepartment ?? ""),
-            Text(userInfo.userDescription ?? ""),
-            Text(userInfo.userAuth.toString()),*/
-            FilledButton(
-              onPressed: () async {
-                await storage.delete(key: "login");
-                loginInfo.logout();
-                if(!mounted) return;
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginPage(),
-                  ), (route) => false,
-                );
-              },
-              child: const Text('Logout'),
+            const SizedBox(height: 20),
+            Row(
+              children: <Widget>[
+                const SizedBox(width: 20),
+                Expanded(
+                  flex: 1,
+                  child: Card(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 20),
+                        Row(
+                          children: [
+                            const SizedBox(width: 20),
+                            Text(userInfo.userNickName??"", style: const TextStyle(fontSize: 30, fontFamily: 'bitbit')),
+                            const SizedBox(width: 20),
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("${userInfo.userMbti?? ""} / ${userInfo.userGender ?? ""}"),
+                                  Text(userInfo.userUniversity ?? ""),
+                                  Text("${userInfo.userDepartment ?? ""} / ${userInfo.userStudentId ?? ""}"),
+                                ],
+                              )
+                            ),
+                            const SizedBox(width: 20),
+                            if (userInfo.userAuth == true) const Text("인증됨", style: TextStyle(color: Colors.green)),
+                            if (userInfo.userAuth == false) const Text("인증되지 않음", style: TextStyle(color: Colors.red)),
+                            const SizedBox(width: 20),
+                          ],
+                        ),
+                        const Divider(height: 0,),
+                        const SizedBox(height: 20),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text("자기소개"),
+                            Text(userInfo.userDescription ?? ""),
+                          ],
+                        )
+                      ]
+                    )
+                  ),
+                ),
+                const SizedBox(width: 20),
+              ],
+            ),
+            Row(
+              children: [
+                const SizedBox(width: 20),
+                Expanded(
+                  flex: 1,
+                  child: Card(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 10),
+                        const Text("  계정", style: TextStyle(fontFamily: "bitbit", fontSize: 25),),
+                        const SizedBox(height: 10),
+                        const Divider(height: 0,),
+                        ListTile(
+                          title: const Text('학교인증'),
+                          onTap: () => Navigator.pushNamed(context, '/university'),
+                        ),
+                        const Divider(height: 0,),
+                        ListTile(
+                          title: const Text('회원정보 수정'),
+                          onTap: () => Navigator.pushNamed(context, '/edit'),
+                        ),
+                        const Divider(height: 0,),
+                        ListTile(
+                          title: const Text("비밀번호 변경"),
+                          onTap: () => Navigator.pushNamed(context, '/password'),
+                        ),
+                      ],
+                    )
+                  )
+                ),
+                const SizedBox(width: 20),
+              ],
+            ),
+            Row(
+              children: [
+                const SizedBox(width: 20),
+                Expanded(
+                  flex: 1,
+                  child: FilledButton(
+                    onPressed: () async {
+                      await storage.delete(key: "login");
+                      loginInfo.logout();
+                      if(!mounted) return;
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ), (route) => false,
+                      );
+                    },
+                    child: const Text('Logout'),
+                  )
+                ),
+                const SizedBox(width: 20),
+              ],
             )
           ]
         ),
