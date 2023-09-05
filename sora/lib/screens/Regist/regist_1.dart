@@ -46,7 +46,7 @@ class _SignUpFirstPageState extends State<SignUpFirstPage> {
             color: ColorScheme.fromSwatch(primarySwatch: Colors.lightGreen)
                 .secondary,
           ),
-          title: const Text('회원가입'),
+          title: const Text('회원가입', style: TextStyle(fontFamily: 'bitbit', fontSize: 30)),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -55,6 +55,22 @@ class _SignUpFirstPageState extends State<SignUpFirstPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  const Center(  
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.radio_button_checked, size: 40),
+                        SizedBox(width: 20),
+                        Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                        SizedBox(width: 20),
+                        Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                        SizedBox(width: 20),
+                        Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
                   TextField(
                     controller: emailController,
                     decoration: const InputDecoration(

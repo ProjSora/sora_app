@@ -40,6 +40,7 @@ class _SignUpFinishedPageState extends State<SignUpFourthPage> {
             color: ColorScheme.fromSwatch(primarySwatch: Colors.lightGreen)
                 .secondary,
           ),
+          title: const Text('회원가입', style: TextStyle(fontFamily: 'bitbit', fontSize: 30)),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -48,6 +49,22 @@ class _SignUpFinishedPageState extends State<SignUpFourthPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  const Center(  
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                        SizedBox(width: 20),
+                        Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                        SizedBox(width: 20),
+                        Icon(Icons.radio_button_unchecked_outlined, size: 20),
+                        SizedBox(width: 20),
+                        Icon(Icons.radio_button_checked, size: 40),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
                   const Text('회원가입 정보를 확인해 주세요', style: TextStyle(fontSize: 20)),
                   const SizedBox(height: 20),
                   Column(
@@ -256,130 +273,11 @@ class _SignUpFinishedPageState extends State<SignUpFourthPage> {
                               ),
                             ),
                           ),
+                          const SizedBox(width: 20),
                         ],
                       )
                     ],
-                  )
-                  /*Row(
-                    children: [
-                      const SizedBox(width: 20),
-                      const Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(Icons.email, size: 40,),
-                            SizedBox(height: 20),
-                            Icon(Icons.lock, size: 40,),
-                            SizedBox(height: 20),
-                            Icon(Icons.phone, size: 40,),
-                            SizedBox(height: 20),
-                            Icon(Icons.person, size: 40,),
-                            SizedBox(height: 20),
-                            Icon(Icons.badge, size: 40,),
-                            SizedBox(height: 20),
-                            Icon(Icons.add_chart_rounded, size: 40,),
-                            SizedBox(height: 20),
-                            Icon(Icons.school, size: 40,),
-                            SizedBox(height: 20),
-                            Icon(Icons.history_edu, size: 40,),
-                            SizedBox(height: 20),
-                            Icon(Icons.numbers, size: 40,),
-                          ],
-                        )
-                      ),
-                      const SizedBox(width: 20),
-                      Expanded(
-                        flex: 10,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Card(
-                              child: SizedBox(
-                                height: 40,
-                                child: Center(
-                                  child: Text(widget.email),
-                                )
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Card(
-                              child: SizedBox(
-                                height: 40,
-                                child: Center(
-                                  child: Text(widget.password),
-                                )
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Card(
-                              child: SizedBox(
-                                height: 40,
-                                child: Center(
-                                  child: Text(widget.password),
-                                )
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Card(
-                              child: SizedBox(
-                                height: 40,
-                                child: Center(
-                                  child: Text(widget.password),
-                                )
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Card(
-                              child: SizedBox(
-                                height: 40,
-                                child: Center(
-                                  child: Text(widget.password),
-                                )
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Card(
-                              child: SizedBox(
-                                height: 40,
-                                child: Center(
-                                  child: Text(widget.password),
-                                )
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Card(
-                              child: SizedBox(
-                                height: 40,
-                                child: Center(
-                                  child: Text(widget.password),
-                                )
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Card(
-                              child: SizedBox(
-                                height: 40,
-                                child: Center(
-                                  child: Text(widget.password),
-                                )
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Card(
-                              child: SizedBox(
-                                height: 40,
-                                child: Center(
-                                  child: Text(widget.password),
-                                )
-                              ),
-                            ),
-                          ],
-                        )
-                      ),
-                      const SizedBox(width: 20),
-                    ],
-                  ),*/,
+                  ),
                   const SizedBox(height: 20),
                   FilledButton(
                     onPressed: () async {
@@ -419,7 +317,7 @@ class _SignUpFinishedPageState extends State<SignUpFourthPage> {
                         );
                       }
                     },
-                    child: const Text('로그인화면으로 이동'),
+                    child: const Text('회원가입 완료'),
                   )
                 ],
               )

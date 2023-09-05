@@ -33,6 +33,7 @@ class _MyApp extends State<MyApp> {
     return MaterialApp(
       title: 'Sora App',
       theme: ThemeData(
+        fontFamily: 'Hakgyo',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
         useMaterial3: true,
       ),
