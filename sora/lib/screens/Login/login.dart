@@ -23,9 +23,11 @@ class _LoginPageState extends State<LoginPage> {
   // This is the state of the login page.
   late TextEditingController idController;
   late TextEditingController passwordController;
-  String? userInfo = "";
+  String? storedId = "";
+  String? storedPassword = "";
 
   bool passwordVisible = true;
+  bool autoLoginIsAvailable = false;
 
   static const storage = FlutterSecureStorage();
 
@@ -48,10 +50,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _asyncMethod() async {
-    userInfo = await storage.read(key:"login");
+    storedId = await storage.read(key:"id");
+    storedPassword = await storage.read(key:"password");
 
-    if(!mounted) return;
-    if (userInfo != null) {
+    var result = await http.post(
+      Uri.parse(loginUrl.toString()),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: json.encode({
+        "email": storedId,
+        "user_pw": storedPassword,
+      }),
+    );
+    var response = jsonDecode(utf8.decode(result.bodyBytes));
+    if (!mounted) return;
+    if (result.statusCode == 200 && response["state"] != "fail") {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
@@ -76,6 +91,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget> [
                 Image.asset('images/sora_logo.png', width: 150, height: 150),
                 const SizedBox(height: 10,),
@@ -112,14 +128,34 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 10,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [    
+                    Checkbox(value: autoLoginIsAvailable, onChanged: (value) {
+                      autoLoginIsAvailable = value!;
+                    }),
+                    const Text('자동 로그인'),
+                  ],
+                ),
+                const SizedBox(height: 10,),
                 FilledButton(
                   onPressed: (idController.text.isNotEmpty &&
                               passwordController.text.isNotEmpty) ? 
                     () async {
-                    await storage.write(
-                      key: 'login',
-                      value: "id${idController.text} password${passwordController.text}",
-                    );
+                    if (autoLoginIsAvailable) {
+                      await storage.write(
+                        key: "id",
+                        value: idController.text
+                      );
+                      await storage.write(
+                        key: "password",
+                        value: passwordController.text
+                      );
+                    } else {
+                      await storage.delete(key: "id");
+                      await storage.delete(key: "password");
+                    }
                     var result = await http.post(
                       Uri.parse(loginUrl.toString()),
                       headers: {
@@ -155,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       );
                     } else {
-                      _showDialog('Failed to login');
+                      _showDialog('로그인에 실패했습니다.');
                     }
                   } : () => {},
                   child: const Text('Login'),
